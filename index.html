@@ -1,24 +1,31 @@
 <html>
 <head> <title> Test page </title> 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8.3/dist/teachablemachine-pose.min.js"></script>
+
+
+
+</head>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8.3/dist/teachablemachine-pose.min.js"></script>  </head>
 <body>
 
 <div> <h1>원지연의 테스트 페이지 </h1> </div>
-<div>   Teachable Machine Image Model <br>
-    	Start 버튼을 클릭하여 수어번역을 시작해보세요!  <br> </div>
-<button type="button" onclick="init()">Start</button> <br>
+
+<div>
+    Start 버튼을 클릭하여 수어번역을 시작해보세요! 
+</div>
+
 
 <label for='inputText'> 인식된 수어는 </label>
-<input id='inputText' type="text"  />  입니다.
+<input id='inputText' type="text"  />  입니다.  <br>
 
+<div>Teachable Machine Image Model</div>
+<button type="button" onclick="init()">Start</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
-
-
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
@@ -65,7 +72,8 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         for (let i = 0; i < maxPredictions; i++) {
-            const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+            const classPrediction =
+                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
 
 	if(prediction[i].probability.toFixed(2) >= 0.80)
@@ -73,9 +81,10 @@
 		const input = document.getElementById("inputText");
 		input.value = prediction[i].className;
 	}
+
         }
     }
-
 </script>
+
 </body>
 </html>
